@@ -1,0 +1,10 @@
+venv
+.DS_Store
+__pycache__
+data
+.idea
+out
+temp
+.ipynb_checkpoints
+dist
+poetry.lock

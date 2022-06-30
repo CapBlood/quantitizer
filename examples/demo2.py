@@ -1,6 +1,6 @@
 import numpy as np
 
-from quantitizer import quantitize, quantitize_experimental
+from quantitizer import quantitize, quantitize_cuda
 
 
 if __name__ == "__main__":

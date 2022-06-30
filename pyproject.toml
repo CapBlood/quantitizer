@@ -8,6 +8,7 @@ authors = ["CapBlood <stalker.anonim@mail.ru>"]
 python = "^3.8"
 gensim = "^4.2.0"
 numpy = "^1.23.0"
+cuml = "^0.6.1"
 
 [tool.poetry.dev-dependencies]
 

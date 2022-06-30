@@ -1,6 +1,6 @@
 import numpy as np
 
-from quantitizer import quantitize, quantitize_experimental
+from quantitizer import quantitize, quantitize_cuda
 
 if __name__ == "__main__":
     path_vectors = "data/181/model.model.vectors.npy"

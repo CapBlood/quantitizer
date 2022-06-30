@@ -2,6 +2,7 @@ import numpy as np
 
 from quantitizer import quantitize, quantitize_experimental
 
+
 if __name__ == "__main__":
     matrix = np.random.random((50000, 1000))
 

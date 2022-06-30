@@ -61,7 +61,9 @@ class Record(object):
 class PQ(Record):
     __attributes__ = ['vectors', 'dim', 'qdim', 'centroids', 'indexes', 'codes']
 
-    def __init__(self, vectors, dim, qdim, centroids, indexes, codes):
+    def __init__(
+            self, vectors, dim, qdim, centroids,
+            indexes, codes):
         """
         :param vectors: number of rows
         :param dim: dimensionality of decompressed vectors
@@ -74,7 +76,7 @@ class PQ(Record):
         self.dim = dim
         self.qdim = qdim
         self.centroids = centroids
-        self.indexes = indexes
+        self.indexes = np.array(indexes)
         self.codes = codes
         self.qdims = np.arange(self.qdim)
 

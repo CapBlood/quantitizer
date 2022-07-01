@@ -1,12 +1,14 @@
 # quantitizer
-Пакет quantitizer позволяет проводить сжимать модели машинного обучения, 
-например, модели эмбеддингов посредством квантования матриц.
+Пакет quantitizer позволяет сжимать модели эмбеддингов посредством квантования матриц.
 
 ## Особенности
 - Доступна реализация квантования с использованием CUDA (при помощи [RAPIDS](https://rapids.ai/)).
 - Интеграция с библиотекой [gensim](https://radimrehurek.com/gensim/) (на данный момент только модель fasttext).
+- Загрузка уже ранее сжатых моделей и использование их в своих проектах.
 
 ## Примеры
+
+### Пример сжатия массива numpy
 ```python
 >> matrix = np.random.random((50000, 1000))
 >> qmatrix = quantitize(matrix, sub_size=5)
@@ -15,6 +17,19 @@
 >> qmatrix.nbytes // 1024 // 1024
 >> 2
 ```
+
+### Пример использования сжатой модели fasttext
+```python
+>> from quantitizer.pretrain import load
+>> from quantitizer.integration.gensim.fasttext import CompressedFastTextKeyedVectors
+
+>> load("fasttext-compressed-en-100")
+>> ft = CompressedFastTextKeyedVectors.load("fasttext_compressed_en_100")
+>> vec = ft.get_vector("word")
+```
+
+## Доступные модели
+- `fasttext-compressed-en-100` - английская версия fasttext, сжатая с разбиением 100.
 
 ## Эксперименты
 
@@ -35,12 +50,6 @@
 |          2           | ~ 1 минута 4 секунды  |      ~ 14 секунд      |     ~ 269.36     |    ~ 0.40    |
 |         100          | ~ 61 минута 30 секунд | ~ 4 минуты 51 секунда |     ~ 642.82     |    ~ 0.94    |
 
-
-## TODO
-- [x] Сделать установку пакета с помощью pip.
-- [ ] Реализовать классы-замены для подмены numpy array и pytorch tensor.
-- [x] Ускорить quantitize.
-- [x] Привести примеры использования для квантизации моделей fasttext и [сравнить](https://vasnetsov93.medium.com/shrinking-fasttext-embeddings-so-that-it-fits-google-colab-cd59ab75959e) качество.
 
 ## Ссылки
 - [Подробнее](http://mccormickml.com/2017/10/13/product-quantizer-tutorial-part-1/) о product quantization

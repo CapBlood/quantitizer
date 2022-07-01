@@ -9,6 +9,7 @@ python = "^3.8"
 gensim = "^4.2.0"
 numpy = "^1.23.0"
 cuml = "^0.6.1"
+"mega.py" = "^1.0.8"
 
 [tool.poetry.dev-dependencies]
 

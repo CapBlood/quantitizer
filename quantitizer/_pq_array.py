@@ -1,6 +1,8 @@
 import numpy as np
 
 
+# This took from repo https://github.com/natasha/navec
+
 class Record(object):
     __attributes__ = []
 

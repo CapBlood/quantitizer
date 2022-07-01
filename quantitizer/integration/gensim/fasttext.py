@@ -6,6 +6,8 @@ from gensim.models.fasttext import FastTextKeyedVectors, ft_ngram_hashes
 EPSILON = 1e-24
 
 
+# This took from repo https://github.com/avidale/compress-fasttext
+
 def make_new_fasttext_model(
         ft,
         new_vectors,

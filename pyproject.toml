@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quantitizer"
-version = "0.1.0"
+version = "1.0"
 description = "This package allows to quantitize matrix to compress different ML models."
 authors = ["CapBlood <stalker.anonim@mail.ru>"]
 

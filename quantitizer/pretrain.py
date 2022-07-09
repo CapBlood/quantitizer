@@ -5,7 +5,9 @@ from quantitizer.exceptions import NotFoundModel
 __mega = Mega()
 __url_map = dict({
     "fasttext-compressed-en-100":
-        "https://mega.nz/file/KyA2UDZK#dMbytXDGGiUdIbJyx64OpS3sZKlA2dUkExe5bGbAAkA"
+        "https://mega.nz/file/KyA2UDZK#dMbytXDGGiUdIbJyx64OpS3sZKlA2dUkExe5bGbAAkA",
+    "w2v-compressed-en-100":
+        "https://mega.nz/file/3jQRVRha#gibpsoGJPyPyB93In1ZMk451WWy6vGuZMRO9y4_SbxE"
 })
 
 

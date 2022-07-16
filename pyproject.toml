@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "quantitizer"
 version = "1.1.0"
-description = "This package allows to quantitize matrix to compress different ML models."
+description = "This package allows to quantitize matrix to compress different embedding models."
 authors = ["CapBlood <stalker.anonim@mail.ru>"]
 homepage = "https://github.com/CapBlood/quantitizer"
 #readme = "README.md"

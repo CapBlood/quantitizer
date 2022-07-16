@@ -69,12 +69,13 @@ vec = ft.get_vector("word")
 ```
 
 ### Пример использования сжатой модели word2vec
+
 ```python
 from quantitizer.pretrain import load
 from quantitizer.integration.gensim.word2vec import load_wv
 
 load("w2v-compressed-en-100")
-wv = load_wv("w2v-compressed-en-100")
+wv = load_wv("data/w2v-compressed-en-100")
 vec = wv.get_vector("computer")
 ```
 
@@ -107,6 +108,18 @@ vec = wv.get_vector("computer")
 |          2           | ~ 1 минута 4 секунды  |      ~ 14 секунд      |        ~ 269.36        |    ~ 0.40    |
 |         100          | ~ 61 минута 30 секунд | ~ 4 минуты 51 секунда |        ~ 642.82        |    ~ 0.94    |
 
+
+## Разработка
+### Развертывание среды
+Для установки всех модулей, необходимых для разработки данного пакета, необходимо использовать пакетные менеджер 
+[Poetry](https://python-poetry.org/). Затем необходимо использовать команду `poetry install` для установки
+всех необходимых зависимостей.
+
+### Тестирование
+Для запуска всех тестов используется команда `poetry run test_all`.
+
+### Сборка
+Сборка пакета осуществляется командой `poetry build`.
 
 ## Ссылки
 - [Подробнее](http://mccormickml.com/2017/10/13/product-quantizer-tutorial-part-1/) о product quantization

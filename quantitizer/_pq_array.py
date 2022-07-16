@@ -108,6 +108,10 @@ class PQ(Record):
     def __len__(self):
         return self.vectors
 
+    def __eq__(self, other):
+        return self.vectors == other.vectors and self.dim == other.dim and self.qdim == other.qdim and \
+            self.centroids == other.centroids and (self.codes == other.codes).all() and (self.indexes == other.indexes).all()
+
     def sqrt(self):
         return self ** 0.5
 

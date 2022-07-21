@@ -4,8 +4,7 @@ from unittest.mock import patch
 import numpy as np
 from gensim.models.fasttext import FastTextKeyedVectors
 
-from quantitizer.integration.gensim.fasttext import quantitize_ft
-from quantitizer._pq_array import PQ
+from quantitizer.integration.gensim.fasttext import quantitize_ft, PQ
 
 
 class TestFastText(unittest.TestCase):

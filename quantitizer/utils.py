@@ -8,14 +8,10 @@ try:
 except ImportError:
     from gensim.models.fasttext import ft_ngram_hashes
 
-# Custom objects know their class.
-# Function objects seem to know way too much, including modules.
-# Exclude modules as well.
 BLACKLIST = type, ModuleType, FunctionType
 
 
 def getsize(obj):
-    """ sum size of object & members. """
     if isinstance(obj, BLACKLIST):
         raise TypeError('getsize() does not take argument of type: ' + str(type(obj)))
     seen_ids = set()

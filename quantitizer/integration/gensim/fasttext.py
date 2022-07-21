@@ -1,22 +1,45 @@
 import warnings
+from typing import Optional, Type, Literal, Union
 
 import numpy as np
 from gensim.models.fasttext import FastTextKeyedVectors, ft_ngram_hashes
 
-from quantitizer import quantitize
+from quantitizer import quantitize, PQ
 
-EPSILON = 1e-24
+EPSILON: float = 1e-24
+MODE_QUANTITIZE = Literal['cpu', 'cuda']
 
 
-def quantitize_ft(ft, sub_size, mode="cpu", n_iter=5):
+def quantitize_ft(
+        ft: FastTextKeyedVectors, sub_size: int,
+        mode: MODE_QUANTITIZE = "cpu", n_iter: int = 5) -> FastTextKeyedVectors:
+    """Compresses FastTextKeyedVectors model.
+
+    Parameters
+    ----------
+    ft : FastTextKeyedVectors
+        Fasttext model to compress it.
+    sub_size : int
+        Number of partitions to compress.
+    mode : {'cuda', 'cpu'}, default: 'cpu'
+        Calculation mode. It may be 'cuda' or 'cpu'.
+    n_iter : int, default: 5
+        Number of iterations. It affects the accuracy of calculations.
+
+    Returns
+    -------
+    FastTextKeyedVectors
+        Compressed fasttext model.
+    """
+
     if mode == "cpu":
-        ft_q = make_new_fasttext_model(
+        ft_q: FastTextKeyedVectors = make_new_fasttext_model(
             ft, quantitize(ft.vectors, sub_size=sub_size, n_iter=n_iter),
             quantitize(ft.vectors_ngrams, sub_size=sub_size, n_iter=n_iter))
     elif mode == "cuda":
         from quantitizer.cuda import quantitize_cuda
 
-        ft_q = make_new_fasttext_model(
+        ft_q: FastTextKeyedVectors = make_new_fasttext_model(
             ft, quantitize_cuda(ft.vectors, sub_size=sub_size, n_iter=n_iter),
             quantitize_cuda(ft.vectors_ngrams, sub_size=sub_size, n_iter=n_iter))
     else:
@@ -25,25 +48,36 @@ def quantitize_ft(ft, sub_size, mode="cpu", n_iter=5):
     return ft_q
 
 
-def load_ft(path):
+def load_ft(path: str) -> FastTextKeyedVectors:
+    """Loads compressed fasttext model from local disk.
+
+    Parameters
+    ----------
+    path : str
+        Path to compressed fasttext model to load.
+
+    Returns
+    -------
+    FastTextKeyedVectors
+        Compressed fasttext model.
+    """
+
     ft = CompressedFastTextKeyedVectors.load(path)
     return ft
 
 
-# This took from repo https://github.com/avidale/compress-fasttext (David Dale)
-
+# The next code is from repo https://github.com/avidale/compress-fasttext (David Dale)
 
 def make_new_fasttext_model(
-        ft,
-        new_vectors,
-        new_vectors_ngrams,
-        new_vocab=None,
-        cls=None,
-):
-    cls = cls or CompressedFastTextKeyedVectors
-    # let the model be the ultimate type before saving+loading it
-    # cls = cls or gensim.models.fasttext.FastTextKeyedVectors
-    new_ft = cls(
+        ft: FastTextKeyedVectors,
+        new_vectors: Union[np.ndarray, PQ],
+        new_vectors_ngrams: Union[np.ndarray, PQ],
+        new_vocab: Optional[dict] = None,
+        cls: Optional[Type[FastTextKeyedVectors]] = None,
+) -> FastTextKeyedVectors:
+    cls: Type[FastTextKeyedVectors] = cls or CompressedFastTextKeyedVectors
+
+    new_ft: cls = cls(
         vector_size=ft.vector_size,
         min_n=ft.min_n,
         max_n=ft.max_n,

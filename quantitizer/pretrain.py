@@ -11,10 +11,18 @@ __url_map = dict({
 })
 
 
-def load(name, outdir="."):
-    # m = __mega.login()
+def load(name: str, outdir: str = ".") -> None:
+    """Loads pretrain models.
+
+    Parameters
+    ----------
+    name : str
+        Name of pretrain model.
+    outdir : str
+        Path to load.
+    """
+
     if name not in __url_map:
         raise NotFoundModel("Model not found")
 
     __mega.download_url(__url_map[name], dest_path=outdir)
-    # m.download_url(__url_map[name], dest_path=outdir)

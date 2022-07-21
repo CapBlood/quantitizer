@@ -8,3 +8,4 @@ temp
 .ipynb_checkpoints
 dist
 .pytest_cache
+docs/build

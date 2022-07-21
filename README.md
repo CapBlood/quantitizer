@@ -121,6 +121,9 @@ vec = wv.get_vector("computer")
 ### Сборка
 Сборка пакета осуществляется командой `poetry build`.
 
+### Сборка документации
+Для сборки документации можно использовать команду `make html` в директории `docs`.
+
 ## Ссылки
 - [Подробнее](http://mccormickml.com/2017/10/13/product-quantizer-tutorial-part-1/) о product quantization
 - [Пример](http://ethen8181.github.io/machine-learning/deep_learning/multi_label/product_quantization.html#Computing-Query-Distance)
